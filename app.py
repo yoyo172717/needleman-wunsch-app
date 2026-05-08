@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 
-aligner = Flask(__name__)
+# MUST be named "app" for deployment detection
+app = Flask(__name__)
 
 
 MATCH_REWARD = 1
@@ -8,7 +9,7 @@ MISMATCH_PENALTY = -1
 GAP_PENALTY = -2
 
 
-@aligner.route("/")
+@app.route("/")
 def landing():
     return render_template("index.html")
 
@@ -47,15 +48,8 @@ def perform_global_alignment(strand_a, strand_b):
             else:
                 diagonal_score += MISMATCH_PENALTY
 
-            upward_score = (
-                scoring_grid[r - 1][c]
-                + GAP_PENALTY
-            )
-
-            leftward_score = (
-                scoring_grid[r][c - 1]
-                + GAP_PENALTY
-            )
+            upward_score = scoring_grid[r - 1][c] + GAP_PENALTY
+            leftward_score = scoring_grid[r][c - 1] + GAP_PENALTY
 
             scoring_grid[r][c] = max(
                 diagonal_score,
@@ -79,15 +73,9 @@ def perform_global_alignment(strand_a, strand_b):
             diagonal_score = scoring_grid[r - 1][c - 1]
 
             if strand_a[r - 1] == strand_b[c - 1]:
-                expected_score = (
-                    diagonal_score
-                    + MATCH_REWARD
-                )
+                expected_score = diagonal_score + MATCH_REWARD
             else:
-                expected_score = (
-                    diagonal_score
-                    + MISMATCH_PENALTY
-                )
+                expected_score = diagonal_score + MISMATCH_PENALTY
 
             if current_score == expected_score:
 
@@ -96,15 +84,11 @@ def perform_global_alignment(strand_a, strand_b):
 
                 r -= 1
                 c -= 1
-
                 continue
 
         if r > 0:
 
-            upward_score = (
-                scoring_grid[r - 1][c]
-                + GAP_PENALTY
-            )
+            upward_score = scoring_grid[r - 1][c] + GAP_PENALTY
 
             if current_score == upward_score:
 
@@ -112,7 +96,6 @@ def perform_global_alignment(strand_a, strand_b):
                 aligned_b = "-" + aligned_b
 
                 r -= 1
-
                 continue
 
         aligned_a = "-" + aligned_a
@@ -128,22 +111,16 @@ def perform_global_alignment(strand_a, strand_b):
     }
 
 
-@aligner.route("/align", methods=["POST"])
+@app.route("/align", methods=["POST"])
 def align_sequences():
 
     payload = request.get_json()
 
-    strand_a = (
-        payload["sequence_a"]
-        .upper()
-        .replace(" ", "")
-    )
+    if not payload or "sequence_a" not in payload or "sequence_b" not in payload:
+        return jsonify({"error": "Missing sequences"}), 400
 
-    strand_b = (
-        payload["sequence_b"]
-        .upper()
-        .replace(" ", "")
-    )
+    strand_a = payload["sequence_a"].upper().replace(" ", "")
+    strand_b = payload["sequence_b"].upper().replace(" ", "")
 
     alignment_result = perform_global_alignment(
         strand_a,
@@ -153,5 +130,6 @@ def align_sequences():
     return jsonify(alignment_result)
 
 
+# Local-only run (ignored by Vercel/Render)
 if __name__ == "__main__":
-    aligner.run(debug=True)
+    app.run(debug=True, host="0.0.0.0", port=5000)
