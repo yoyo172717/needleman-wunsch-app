@@ -1,0 +1,207 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+
+    margin: 0;
+    padding: 0;
+
+    font-family: Inter, Arial, sans-serif;
+
+    background: #f7f3ee;
+
+    color: #2f241f;
+
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+}
+
+.shell {
+
+    width: 100%;
+    max-width: 950px;
+
+    padding: 40px 24px;
+}
+
+.panel {
+
+    background: #fffaf5;
+
+    border: 1px solid #eadfd2;
+
+    border-radius: 28px;
+
+    padding: 36px;
+
+    box-shadow:
+        0 8px 30px rgba(79, 54, 37, 0.08);
+}
+
+.brand-mark {
+
+    display: inline-block;
+
+    background: #dfd2c3;
+
+    color: #5a4635;
+
+    padding: 8px 14px;
+
+    border-radius: 999px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    margin-bottom: 18px;
+}
+
+h1 {
+
+    margin: 0;
+
+    font-size: 42px;
+
+    letter-spacing: -1px;
+}
+
+.subtitle {
+
+    margin-top: 12px;
+    margin-bottom: 28px;
+
+    color: #7a6758;
+
+    line-height: 1.6;
+}
+
+label {
+
+    display: block;
+
+    margin-top: 20px;
+    margin-bottom: 10px;
+
+    font-weight: 600;
+}
+
+textarea {
+
+    width: 100%;
+
+    min-height: 160px;
+
+    resize: vertical;
+
+    padding: 18px;
+
+    border-radius: 18px;
+
+    border: 1px solid #d8cbbb;
+
+    background: white;
+
+    font-size: 15px;
+
+    outline: none;
+
+    transition: 0.2s ease;
+}
+
+textarea:focus {
+
+    border-color: #c8a98a;
+
+    box-shadow:
+        0 0 0 4px rgba(200, 169, 138, 0.15);
+}
+
+button {
+
+    width: 100%;
+
+    margin-top: 28px;
+
+    padding: 16px;
+
+    border: none;
+
+    border-radius: 18px;
+
+    background: #d97757;
+
+    color: white;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+button:hover {
+
+    background: #c96a4d;
+}
+
+.metric-card {
+
+    margin-top: 28px;
+
+    background: #f3ebe3;
+
+    border-radius: 20px;
+
+    padding: 24px;
+
+    text-align: center;
+}
+
+.metric-label {
+
+    color: #7a6758;
+
+    margin-bottom: 12px;
+}
+
+#alignmentScore {
+
+    font-size: 34px;
+
+    font-weight: 700;
+}
+
+.answer-zone {
+
+    margin-top: 24px;
+
+    background: #f3ebe3;
+
+    border-radius: 20px;
+
+    padding: 24px;
+}
+
+.answer-label {
+
+    color: #7a6758;
+
+    margin-bottom: 12px;
+
+    font-size: 14px;
+}
+
+.sequence-output {
+
+    font-family: monospace;
+
+    font-size: 20px;
+
+    line-height: 1.8;
+
+    word-break: break-word;
+}
