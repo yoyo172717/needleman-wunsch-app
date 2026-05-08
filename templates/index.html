@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>ATLAS Sequence Alignment</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="shell">
+
+        <div class="panel">
+
+            <div class="brand-mark">
+                ATLAS Alignment Engine
+            </div>
+
+            <h1>
+                Global Sequence Alignment
+            </h1>
+
+            <p class="subtitle">
+                Needleman–Wunsch alignment for DNA, RNA, or protein sequences.
+            </p>
+
+
+            <!-- Sequence A -->
+            <label>
+                Sequence A
+            </label>
+
+            <textarea
+                id="strandA"
+                placeholder="Paste first sequence..."></textarea>
+
+
+            <!-- Sequence B -->
+            <label>
+                Sequence B
+            </label>
+
+            <textarea
+                id="strandB"
+                placeholder="Paste second sequence..."></textarea>
+
+
+            <!-- Action -->
+            <button onclick="runAlignment()">
+
+                Align Sequences
+
+            </button>
+
+
+            <!-- Alignment Score -->
+            <div class="metric-card">
+
+                <div class="metric-label">
+                    Alignment Score
+                </div>
+
+                <div id="alignmentScore">
+
+                    --
+
+                </div>
+
+            </div>
+
+
+            <!-- Alignment Output -->
+            <div class="answer-zone">
+
+                <div class="answer-label">
+                    Aligned Sequence A
+                </div>
+
+                <div id="alignedA"
+                     class="sequence-output">
+
+                    --
+
+                </div>
+
+            </div>
+
+
+            <div class="answer-zone">
+
+                <div class="answer-label">
+                    Aligned Sequence B
+                </div>
+
+                <div id="alignedB"
+                     class="sequence-output">
+
+                    --
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
